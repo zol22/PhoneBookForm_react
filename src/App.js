@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import InformationTable from './components/InformationTable';
+import PhoneBookForm from './components/PhoneBookForm';
 
 function App() {
+
+  // Create a state of users to (default empty):
+  // 1- Add the returned values from <PhoneBookForm /> to here!
+  // 2- Pass this state to <InformationTable /> to display the user
+  const [users, setUsers] = useState([]);
+
+  // Function to append the users to the users state
+  const addUserItem = (user) => {
+    setUsers([...users, user]);
+  };
+
+  console.log(users)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <PhoneBookForm addUserItem={addUserItem}/>
+      <InformationTable users={users}/>
+ 
     </div>
   );
 }
